@@ -15,7 +15,7 @@ export default function RegisterPage() {
       const response = await fetch(`${apiUrl}/auth/signup`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email, senha }),
+        body: JSON.stringify({ email, password: senha }),
       });
 
       if (!response.ok) throw new Error("Erro no cadastro");
