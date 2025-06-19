@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
+const apiUrl = import.meta.env.VITE_API_URL;
+
 export default function RegisterPage() {
   const [email, setEmail] = useState("");
   const [senha, setSenha] = useState("");
@@ -10,7 +12,7 @@ export default function RegisterPage() {
     e.preventDefault();
 
     try {
-      const response = await fetch("https://habit-tracker-api-9w3t.onrender.com/register", {
+      const response = await fetch(`${apiUrl}/register`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, senha }),

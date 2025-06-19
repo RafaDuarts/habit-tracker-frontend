@@ -2,6 +2,8 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 
+const apiUrl = import.meta.env.VITE_API_URL;
+
 export default function LoginPage() {
   const [email, setEmail] = useState("");
   const [senha, setSenha] = useState("");
@@ -12,7 +14,7 @@ export default function LoginPage() {
     e.preventDefault();
 
     try {
-      const response = await fetch("https://habit-tracker-api-9w3t.onrender.com/login", {
+      const response = await fetch(`${apiUrl}/login`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, senha }),

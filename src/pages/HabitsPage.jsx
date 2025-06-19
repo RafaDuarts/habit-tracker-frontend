@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import { useAuth } from "../context/AuthContext";
 import { useNavigate } from "react-router-dom";
 
+const apiUrl = import.meta.env.VITE_API_URL;
+
 export default function HabitsPage() {
   const { token, logout } = useAuth();
   const [habits, setHabits] = useState([]);
@@ -14,7 +16,7 @@ export default function HabitsPage() {
 
   const fetchHabits = async () => {
     try {
-      const response = await fetch("https://habit-tracker-api-9w3t.onrender.com/habits", {
+      const response = await fetch(`${apiUrl}/habits`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -31,7 +33,7 @@ export default function HabitsPage() {
     if (!newHabit) return;
 
     try {
-      const response = await fetch("https://habit-tracker-api-9w3t.onrender.com/habits", {
+      const response = await fetch(`${apiUrl}/habits`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
