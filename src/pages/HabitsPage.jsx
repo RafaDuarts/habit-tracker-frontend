@@ -22,6 +22,7 @@ export default function HabitsPage() {
         },
       });
       const data = await response.json();
+      console.log("Hábitos recebidos:", data);
       setHabits(data);
     } catch (error) {
       console.error("Erro ao buscar hábitos:", error);
