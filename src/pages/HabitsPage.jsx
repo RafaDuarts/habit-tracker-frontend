@@ -39,13 +39,13 @@ export default function HabitsPage() {
           "Content-Type": "application/json",
           Authorization: `Bearer ${token}`,
         },
-        body: JSON.stringify({ nome: newHabit }),
+        body: JSON.stringify({ title: newHabit }),
       });
 
       if (!response.ok) throw new Error("Erro ao criar hábito");
 
       setNewHabit("");
-      fetchHabits(); // Atualiza a lista
+      fetchHabits();
     } catch (error) {
       alert("Erro ao criar hábito");
     }
