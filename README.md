@@ -1,12 +1,57 @@
-# React + Vite
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+# Habit Tracker Frontend
 
-Currently, two official plugins are available:
+Este é o frontend do projeto **Habit Tracker**, uma aplicação web para acompanhar seus hábitos diários. Desenvolvido com **React.js**, ele consome uma API REST para cadastro, login, criação e gerenciamento de hábitos pessoais.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 🔧 Tecnologias Utilizadas
 
-## Expanding the ESLint configuration
+- [React.js](https://reactjs.org/)
+- [React Router](https://reactrouter.com/)
+- [Vite](https://vitejs.dev/) para build e dev server
+- CSS puro para estilos globais
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## 📦 Instalação
+
+1. Clone este repositório:
+
+```bash
+git clone https://github.com/rafaduarts/habit-tracker-frontend.git
+cd habit-tracker-frontend
+```
+
+2. Instale as dependências:
+
+```bash
+npm install
+```
+
+3. Crie um arquivo `.env` com a URL da API:
+
+```bash
+VITE_API_URL=https://sua-api.onrender.com
+```
+
+## ▶️ Executar localmente
+
+```bash
+npm run dev
+```
+
+Abra `http://localhost:5173` no navegador para acessar.
+
+
+## ✅ Funcionalidades
+
+- Cadastro de usuários
+- Login e autenticação com JWT
+- Criação, edição e exclusão de hábitos
+- Registro de conclusão diária
+- Logout e proteção de rotas
+
+## 🚀 Deploy
+
+Você pode fazer deploy deste frontend no [Netlify](https://netlify.com), [Vercel](https://vercel.com) ou outro serviço estático. Lembre-se de definir a variável de ambiente `VITE_API_URL` no painel do serviço.
+
+## 🧑‍💻 Autor
+
+Desenvolvido por Rafael Duarte.
