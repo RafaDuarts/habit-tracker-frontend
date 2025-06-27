@@ -22,7 +22,6 @@ export default function HabitsPage() {
         },
       });
       const data = await response.json();
-      console.log("Hábitos recebidos:", data);
       setHabits(data);
     } catch (error) {
       console.error("Erro ao buscar hábitos:", error);
@@ -72,7 +71,7 @@ export default function HabitsPage() {
 
       <ul>
         {habits.map((habit) => (
-          <li key={habit._id}>{habit.nome}</li>
+          <li key={habit._id}>{habit.title}</li>
         ))}
       </ul>
 
