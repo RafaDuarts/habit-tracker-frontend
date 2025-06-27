@@ -28,7 +28,7 @@ export default function HabitsPage() {
 
   const handleCreateHabit = async (e) => {
     e.preventDefault();
-    if (!newHabit) return;
+    if (!newHabit.trim()) return;
 
     try {
       const response = await fetch(`${import.meta.env.VITE_API_URL}/habits`, {
@@ -97,76 +97,74 @@ export default function HabitsPage() {
   };
 
   return (
-    <div style={{ padding: "24px", background: "#333", color: "white", minHeight: "100vh" }}>
+    <div style={{ padding: "24px", background: "#2e2e2e", minHeight: "100vh" }}>
       <h2>Meus Hábitos</h2>
 
-      <form onSubmit={handleCreateHabit} style={{ marginBottom: "20px" }}>
+      <form onSubmit={handleCreateHabit}>
         <input
           type="text"
           placeholder="Novo hábito"
           value={newHabit}
           onChange={(e) => setNewHabit(e.target.value)}
-          style={{ padding: "8px", width: "300px" }}
         />
-        <button type="submit" style={{ marginLeft: "10px", padding: "8px" }}>Adicionar</button>
+        <button type="submit">Adicionar</button>
       </form>
 
-      <ul style={{ listStyle: "none", padding: 0 }}>
-        {habits.map((habit) => (
-          <li key={habit._id} style={{ marginBottom: "16px", background: "#222", padding: "12px", borderRadius: "6px" }}>
-            {editingHabit === habit._id ? (
-              <>
-                <input
-                  type="text"
-                  value={editTitle}
-                  onChange={(e) => setEditTitle(e.target.value)}
-                  style={{ padding: "6px", width: "200px" }}
-                />
-                <button onClick={() => handleUpdateHabit(habit._id)} style={{ marginLeft: "6px" }}>
-                  Salvar
-                </button>
-                <button onClick={() => setEditingHabit(null)} style={{ marginLeft: "4px" }}>
-                  Cancelar
-                </button>
-              </>
-            ) : (
-              <>
-                <strong>{habit.title}</strong>
-                <div style={{ marginTop: "6px" }}>
-                  <button onClick={() => {
-                    setEditTitle(habit.title);
-                    setEditingHabit(habit._id);
-                  }}>
+      <ul>
+        {habits.map((habit) => {
+          const lastLog = habit.logs?.length
+            ? new Date(habit.logs[habit.logs.length - 1].date).toLocaleDateString("pt-BR")
+            : null;
+
+          return (
+            <li key={habit._id}>
+              <div style={{ flex: 1 }}>
+                {editingHabit === habit._id ? (
+                  <>
+                    <input
+                      type="text"
+                      value={editTitle}
+                      onChange={(e) => setEditTitle(e.target.value)}
+                    />
+                    <div style={{ marginTop: "8px" }}>
+                      <button onClick={() => handleUpdateHabit(habit._id)}>Salvar</button>
+                      <button onClick={() => setEditingHabit(null)} style={{ marginLeft: "8px" }}>
+                        Cancelar
+                      </button>
+                    </div>
+                  </>
+                ) : (
+                  <>
+                    <strong>{habit.title}</strong>
+                    {lastLog && (
+                      <p style={{ fontSize: "12px", marginTop: "4px" }}>
+                        Última conclusão: {lastLog}
+                      </p>
+                    )}
+                  </>
+                )}
+              </div>
+
+              {editingHabit !== habit._id && (
+                <div className="habit-actions">
+                  <button
+                    onClick={() => {
+                      setEditTitle(habit.title);
+                      setEditingHabit(habit._id);
+                    }}
+                  >
                     Editar
                   </button>
-                  <button onClick={() => handleDeleteHabit(habit._id)} style={{ marginLeft: "6px" }}>
-                    Deletar
-                  </button>
-                  <button onClick={() => handleLogHabit(habit._id)} style={{ marginLeft: "6px" }}>
-                    Concluir Hoje
-                  </button>
+                  <button onClick={() => handleDeleteHabit(habit._id)}>Deletar</button>
+                  <button onClick={() => handleLogHabit(habit._id)}>Concluir Hoje</button>
                 </div>
-              </>
-            )}
-          </li>
-        ))}
+              )}
+            </li>
+          );
+        })}
       </ul>
 
-      <button
-        onClick={handleLogout}
-        style={{
-          marginTop: "32px",
-          padding: "12px 20px",
-          background: "crimson",
-          border: "none",
-          borderRadius: "8px",
-          color: "white",
-          fontWeight: "bold",
-          cursor: "pointer",
-          width: "100%",
-          maxWidth: "300px"
-        }}
-      >
+      <button onClick={handleLogout} className="logout-button">
         Sair
       </button>
     </div>
